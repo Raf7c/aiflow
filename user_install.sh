@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-src=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/.claude/user
+src=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/claude/user
 dst=$HOME/.claude
 
 mkdir -p "$dst"
