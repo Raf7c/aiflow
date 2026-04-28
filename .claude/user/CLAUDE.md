@@ -10,7 +10,7 @@
 - Concis, sans intro ; une seule question si ambiguïté
 
 ## Comportements
-- Workflow : Plan → Code → Test → Review
+- Workflow : Explore → Plan → Code → Test → Review
 - Tâche multi-fichiers ou incertaine → plan écrit avant tout code
 
 ## Compaction
