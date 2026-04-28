@@ -1,24 +1,20 @@
 ---
-description: "Sécurité infrastructure : moindre privilège, isolation, conteneurs non-root, état d'infrastructure protégé, opérations sur production."
+description: "Sécurité infra (moindre privilège)."
 globs: ["**/infra/**", "**/*.tf", "**/*.tfvars", "**/Dockerfile*", "**/docker-compose*.y*ml", "**/.github/workflows/**", "**/.gitlab-ci.yml", "**/Jenkinsfile"]
 alwaysApply: false
 ---
 
-- Pas de wildcard dans les politiques d'accès (resource, action, principal) ; une politique = un usage précis.
-- Privilèges assumables et temporaires plutôt que credentials long-terme.
-- Identité dédiée par workload, jamais d'identité par défaut ou partagée.
-- Pas de privilèges d'administration globale sauf opération exceptionnelle tracée.
-- Isolation réseau par défaut : trafic entre composants explicitement autorisé, pas implicitement.
-- Politiques de sécurité strictes appliquées par défaut au niveau plateforme.
-- Conteneurs : pas de processus en root ; utilisateur non privilégié déclaré.
-- Capabilités système réduites au strict nécessaire (drop tout puis ajout ciblé).
-- Pas de privilèges étendus (mode privilégié, accès aux ressources de l'hôte, partage du contexte d'exécution de l'hôte).
-- Filesystem en lecture seule quand possible.
-- Images de base minimales ; build multi-étape pour exclure les outils de build de l'artefact final.
-- Tags d'image immuables en production ; pas de tag mouvant.
-- Secrets injectés au build via un mécanisme dédié, jamais via arguments ou variables d'environnement exposés.
-- État d'infrastructure chiffré, distant, versionné, avec verrouillage concurrent.
-- Pas de credentials stockés dans l'état d'infrastructure ; lookup au runtime.
-- Plan d'exécution reviewé avant application en production ; application prod uniquement depuis branche principale après merge.
-- Tests et expérimentations sur environnement éphémère et isolé, jamais sur production.
-- Tokens de pipeline CI : scope minimal, expiration courte, masking des secrets dans les logs.
+Objectif: Limiter l’impact d’un incident infra.
+Portée: Identités, réseau, conteneurs, IaC, pipelines.
+
+Règles:
+- Éviter les wildcards dans les politiques; définir ressources/actions/principaux précis.
+- Utiliser des identités dédiées par workload, sans partage.
+- Préférer droits temporaires assumables à des credentials long‑terme.
+- Isoler les réseaux par défaut; n’ouvrir que ce qui est nécessaire.
+- Ne pas exécuter les conteneurs en root; déclarer un user non‑privileged.
+- Réduire les capabilités; interdire le mode privilégié.
+- Minimiser l’accès à l’hôte et aux volumes sensibles.
+- Chiffrer et verrouiller l’état d’infra; ne pas y stocker de secrets.
+- Revoir les plans avant application en prod; appliquer depuis `main`.
+- Limiter scope/durée des secrets CI; masquer les secrets dans les logs.

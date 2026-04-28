@@ -1,15 +1,19 @@
 ---
-description: "Sécurité applicative : secrets, validation d'inputs, anti-injection, logs propres."
+description: "Sécurité applicative globale."
 alwaysApply: true
 ---
 
-- Jamais de secret en clair dans le code, les commits, les logs, les tests, les exemples.
-- Secrets via variables d'environnement ou secret manager ; fichier d'exemple versionné, fichier réel jamais.
-- Tout input externe (HTTP, CLI, fichier, message, variable d'environnement) validé à la frontière avant traitement.
-- Échec de validation = erreur explicite, jamais de comportement par défaut silencieux.
-- Requêtes vers une base de données : paramètres liés, jamais de concaténation de strings.
-- Commandes système : pas d'interpolation de variables non échappées.
-- Pas de désérialisation de format exécutable ou évalué dynamiquement sur input externe.
-- Pas de PII, tokens, mots de passe ou clés API dans les logs (même tronqués).
-- Pas de protocoles non chiffrés en production.
-- Pas d'utilisateur applicatif avec droits administrateur ou de modification de schéma en production.
+Objectif: Protéger secrets et données, limiter injections.
+Portée: Tout code manipulant entrées externes ou données sensibles.
+
+Règles:
+- Aucun secret en clair dans code, tests, logs, exemples ou commits.
+- Stocker les secrets via env/secret manager + fichiers d’exemple seulement.
+- Valider toute entrée externe à la frontière (HTTP, CLI, fichiers, messages).
+- Traiter un échec de validation comme une erreur explicite, jamais silencieuse.
+- Utiliser des paramètres liés pour le SQL; bannir la concaténation.
+- Ne jamais construire de commandes système avec entrées non échappées.
+- Éviter désérialisation/évaluation dynamiques sur des données non fiables.
+- Interdire toute PII/tokens/mots de passe dans les logs.
+- En prod, n’utiliser que des canaux chiffrés pour données sensibles.
+- Éviter les comptes applicatifs avec droits d’admin globale.

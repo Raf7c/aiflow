@@ -12,7 +12,7 @@ Ce repo résout ces problèmes en concentrant **un système versionné, DRY, por
 
 ## Principes fondateurs
 
-- **Source unique de vérité** : `.claude/` est la source officielle, pas une copie. Pas de double couche `core/adapters/` tant qu'un seul outil cible suffit. Si un deuxième outil arrive, on extrait l'abstraction au troisième usage, pas avant.
+- **Source unique de vérité** : `claude/` est la source officielle, pas une copie. Pas de double couche `core/adapters/` tant qu'un seul outil cible suffit. Si un deuxième outil arrive, on extrait l'abstraction au troisième usage, pas avant.
 - **DRY mais pas dogmatique** : la règle des trois avant d'extraire une abstraction. Une duplication acceptée vaut mieux qu'une mauvaise abstraction imposée.
 - **Fichiers versionnés > prompts UI** : tout vit dans Git. Rien dans les paramètres d'application.
 - **Court et testable > exhaustif et flou** : chaque rule tient en lignes impératives, jamais en paragraphes. ≤ 80 lignes par fichier d'artefact.
@@ -22,24 +22,32 @@ Ce repo résout ces problèmes en concentrant **un système versionné, DRY, por
 
 ## Architecture mentale
 
-Le repo se lit en trois zones, chacune avec une destination d'installation distincte :
+Le repo se lit en deux zones, chacune avec une destination d'installation distincte :
 
 ```
 aiflow/
 │
-├── .claude/                              [configuration IA versionnée]
-│   ├── user/         ─────────────►  ~/.claude/         (transverse à toi, tous projets)
-│   ├── commands/     ─────────────►  <projet>/.claude/  (par projet, vide au MVP)
-│   └── rules/        ─────────────►  <projet>/.claude/rules/  (par projet)
+├── claude/                               [configuration IA versionnée]
+│   ├── user/         ─────────────►  ~/.claude/         (tout ce qui te suit partout)
+│   ├── commands/     ─────────────►  <projet>/.claude/commands/  (vide, futurs par-projet)
+│   └── rules/        ─────────────►  <projet>/.claude/rules/     (vide, futurs par-projet)
 │
 ├── memory-bank/      ─────────────►  <projet>/docs/memory-bank/  (par projet, à remplir)
 │
 └── docs/             [documentation du repo lui-même, lue par humains]
 ```
 
-Le repo est une **source à projeter** vers ces trois destinations, pas un dotfile à cloner directement. Les références internes pointent vers les chemins **après installation** (`@~/.claude/templates/git/commit.md`), pas vers la structure du repo.
+Le repo est une **source à projeter** vers ces destinations, pas un dotfile à cloner directement. Les références internes pointent vers les chemins **après installation** (`@~/.claude/templates/git/commit.md`), pas vers la structure du repo.
+
+Le contenu de `claude/user/` regroupe **tout ce qui te suit partout** : profile (`CLAUDE.md`), permissions (`settings.json`), rules (transverses ET de domaine activées par globs), commands, templates. Les rules de domaine vivent ici aussi parce qu'elles ne consomment pas de tokens hors contexte (activation par globs) ; il n'y a donc aucune raison de les copier projet par projet.
+
+Les dossiers `claude/rules/` et `claude/commands/` à la racine sont conservés vides pour de futures rules ou commands réellement spécifiques à un projet (cas rare).
 
 ## Rôle de chaque brique
+
+- **`CLAUDE.md` (global)** — *qui tu es*. Profile utilisateur lu par Claude Code à chaque session : OS, runtimes, éditeur, préférences de communication, comportements attendus, règles de compaction.
+
+- **`settings.json` (global)** — *ce que Claude a le droit de faire*. Permissions Bash structurées en deny / ask / allow, variables d'environnement, mode d'exécution. L'incarnation opérationnelle des rules de sécurité.
 
 - **`rules`** — *comment coder*. Garde-fous comportementaux à l'impératif, qui corrigent les dérives IA classiques. Activées en permanence (transverses) ou par globs (domaine).
 

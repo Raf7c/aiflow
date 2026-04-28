@@ -28,18 +28,20 @@ Doc opérationnelle, à consulter chaque fois qu'un artefact est ajouté ou modi
 
 | Type d'artefact | `description` | `globs` | `alwaysApply` |
 |---|---|---|---|
-| Rule transverse (`user/rules/`) | Concise, informative | (absent, redondant) | `true` |
-| Rule de domaine (`.claude/rules/`) | Concise, informative | Patterns ciblés | `false` |
+| Rule transverse (`user/rules/*_global.md`) | Concise, informative | (absent, redondant) | `true` |
+| Rule de domaine (`user/rules/*_<domaine>.md`) | Concise, informative | Patterns ciblés | `false` |
 | Rule on-demand (ex : `git_workflow`) | Détaillée avec « À invoquer pour... » | (absent) | `false` |
 | Command | Action attendue, courte | (sans objet) | (sans objet) |
 | Command avec argument | + `argument-hint: "[...]"` | (sans objet) | (sans objet) |
 | Template | (pas de frontmatter) | — | — |
 | Memory-bank | (pas de frontmatter) | — | — |
 
+Note : les rules de domaine vivent dans `user/rules/` au même titre que les transverses, parce qu'elles ne consomment pas de tokens hors contexte (activation par globs). Les dossiers `claude/rules/` et `claude/commands/` à la racine restent réservés aux rares cas d'artefacts spécifiques à un projet précis.
+
 ## Références entre fichiers
 
 - **Syntaxe** : `@~/.claude/...` (chemin **après installation**, pas dans la structure du repo).
-- **Exemple** : une command référence un template via `@~/.claude/templates/git/commit.md`, pas `templates/git/commit.md` ni `aiflow/.claude/user/templates/git/commit.md`.
+- **Exemple** : une command référence un template via `@~/.claude/templates/git/commit.md`, pas `templates/git/commit.md` ni `aiflow/claude/user/templates/git/commit.md`.
 - **Raison** : le repo suit l'interprétation « source à projeter » (cf. `philosophy.md`). Les fichiers vivent leur vie dans `~/.claude/` une fois installés.
 
 ## Critère unique de garde dans une rule

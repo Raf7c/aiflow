@@ -1,13 +1,22 @@
 ---
-description: "Conventions Git : GitHub Flow, granularité, PR. À invoquer pour commit, branche, ou préparation de PR."
+description: "Workflow Git simple (GitHub Flow)."
 alwaysApply: false
 ---
 
-- GitHub Flow : branches courtes depuis `main`, PR vers `main`, squash merge par défaut.
-- Pas de merge direct sur `main`, même en solo.
-- Nom de branche : `<type>/<scope>-<description-kebab>` (types : feat, fix, chore, docs, refactor, test, perf, ci, build).
-- Un commit = un changement atomique, relisable, annulable, cherry-pickable. Pas de commit fourre-tout (`fix divers`, `wip`, `update`).
-- Une PR = une intention ; deux intentions = deux PR.
-- Memory-bank (`docs/memory-bank/architecture.md`, `decisions.md`) mise à jour dans la même PR si impact structurel.
-- Format des messages de commit : voir `@~/.claude/templates/git/commit.md`.
-- Format des descriptions de PR : voir `@~/.claude/templates/git/pr.md`.
+Objectif: Historique lisible, branches courtes, PR claires.
+Portée: Branches, commits, PR.
+
+Branches:
+- Utiliser GitHub Flow : branches depuis `main`, PR vers `main`, squash merge.
+- Ne jamais commit directement sur `main`.
+- Nommer: `<type>/<scope>-<description>` (feat, fix, chore, docs, refactor, test, perf, ci, build).
+
+Commits:
+- Un commit = une intention atomique, facilement revertable.
+- Éviter les commits fourre‑tout (`wip`, `misc`, etc.).
+- Utiliser le format `@~/.claude/templates/git/commit.md`.
+
+PR:
+- Une PR = une seule intention fonctionnelle.
+- Mettre à jour la memory‑bank si l’architecture change.
+- Utiliser le template `@~/.claude/templates/git/pr.md`.
