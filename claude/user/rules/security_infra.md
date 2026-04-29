@@ -1,20 +1,21 @@
 ---
-description: "Sécurité infra (moindre privilège)."
+description: "Sécurité infra (transverse, moindre privilège)."
 globs: ["**/infra/**", "**/*.tf", "**/*.tfvars", "**/Dockerfile*", "**/docker-compose*.y*ml", "**/.github/workflows/**", "**/.gitlab-ci.yml", "**/Jenkinsfile"]
 alwaysApply: false
 ---
 
-Objectif: Limiter l’impact d’un incident infra.
-Portée: Identités, réseau, conteneurs, IaC, pipelines.
+Objectif: Réduire la surface d'attaque et l'impact d'un incident.
+Portée: Tout artefact qui définit ou exécute un composant avec des privilèges, du réseau ou des secrets.
 
 Règles:
-- Éviter les wildcards dans les politiques; définir ressources/actions/principaux précis.
-- Utiliser des identités dédiées par workload, sans partage.
-- Préférer droits temporaires assumables à des credentials long‑terme.
-- Isoler les réseaux par défaut; n’ouvrir que ce qui est nécessaire.
-- Ne pas exécuter les conteneurs en root; déclarer un user non‑privileged.
-- Réduire les capabilités; interdire le mode privilégié.
-- Minimiser l’accès à l’hôte et aux volumes sensibles.
-- Chiffrer et verrouiller l’état d’infra; ne pas y stocker de secrets.
-- Revoir les plans avant application en prod; appliquer depuis `main`.
-- Limiter scope/durée des secrets CI; masquer les secrets dans les logs.
+- Identités dédiées par composant; pas de partage d'identité entre rôles distincts.
+- Privilèges au strict nécessaire; portée et durée minimales.
+- Préférer des credentials éphémères ou révocables aux credentials long-terme.
+- Isoler par défaut (réseau, exécution, données); n'ouvrir que ce qui est explicitement requis.
+- Données sensibles externalisées hors du code, des artefacts et des journaux.
+- Toute exécution privilégiée doit être traçable (qui, quand, sur quoi).
+
+Interdits:
+- Pas de définition de privilèges par caractères jokers.
+- Pas de secrets persistés dans les artefacts livrés ou dans l'état d'infra.
+- Pas de canal de communication non chiffré pour des données sensibles.

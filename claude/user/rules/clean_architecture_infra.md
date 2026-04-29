@@ -1,20 +1,17 @@
 ---
-description: "Architecture infra modulaire."
+description: "Architecture infra modulaire (transverse)."
 globs: ["**/infra/**", "**/*.tf", "**/*.tfvars", "**/Dockerfile*", "**/docker-compose*.y*ml", "**/.github/workflows/**", "**/.gitlab-ci.yml", "**/Jenkinsfile"]
 alwaysApply: false
 ---
 
-Objectif: Infra déclarative, idempotente, modulaire.
-Portée: IaC, conteneurs, pipelines CI/CD, manifests d’orchestrateur.
+Objectif: Infra modulaire, déclarative, indépendante de l'environnement.
+Portée: Tout artefact qui décrit, assemble ou exécute des composants d'infrastructure.
 
 Règles:
-- Un composant infra = interface claire (inputs/outputs/effets).
-- Préférer modules réutilisables au copier‑coller.
-- Garantir l’idempotence des plans d’infra.
-- Préférer déclaratif aux scripts impératifs ad‑hoc.
-- Limiter la logique conditionnelle dans les templates.
-- Séparer les environnements (dev/stage/prod) via config dédiée.
-- Même code pour tous les environnements; seuls inputs changent.
-- Workloads conteneurisés: stateless autant que possible, healthchecks définis.
-- Fixer des limites de ressources (CPU, mémoire) par workload.
-- Externaliser config et secrets hors code et images.
+- Un composant = une interface claire (inputs, outputs, effets observables).
+- Décomposer en unités réutilisables; pas de copier-coller entre composants similaires.
+- Préférer une description déclarative à une suite d'étapes impératives.
+- Limiter la logique conditionnelle dans les définitions; sortir la variation en configuration.
+- Une seule définition pour tous les environnements; seuls les paramètres d'entrée changent.
+- Séparer la définition d'un composant de sa configuration par environnement.
+- Externaliser configuration et secrets hors du code et des artefacts produits.
