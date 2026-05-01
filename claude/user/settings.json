@@ -12,7 +12,7 @@
     "PAGER": "less"
   },
   "permissions": {
-    "defaultMode": "auto",
+    "defaultMode": "acceptEdits",
     "deny": [
       "Read(**/.env)",
       "Read(**/.env.*)",
@@ -71,7 +71,6 @@
       "Bash(cat ~/.gnupg/*)",
       "Bash(cat ~/.netrc)",
       "Bash(grep * .env*)",
-      "Bash(grep * .env)",
       "Bash(grep * ~/.aws/*)",
       "Bash(grep * ~/.ssh/*)",
       "Bash(printenv)",
@@ -263,9 +262,7 @@
       "Bash(iptables -F*)",
       "Bash(iptables --flush*)",
       "Bash(ufw reset*)",
-      "Bash(ufw disable*)",
-      "Bash(history -c)",
-      "Bash(history -w *)"
+      "Bash(ufw disable*)"
     ],
     "ask": [
       "Bash(python *)",

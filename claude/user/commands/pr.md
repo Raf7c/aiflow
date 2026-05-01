@@ -1,6 +1,13 @@
 ---
 description: "Prépare titre et description de PR à coller dans GitHub depuis le diff de branche."
 argument-hint: "[lien optionnel vers issue ou plan]"
+allowed-tools:
+  - Bash(git log:*)
+  - Bash(git diff:*)
+  - Bash(git status)
+  - Bash(git branch:*)
+  - Read
+  - Glob
 ---
 
 # /pr
@@ -30,9 +37,9 @@ Le titre et la description finale, prêts à copier-coller dans GitHub.
 
 ## Rules
 
-- Format et granularité : `@~/.claude/rules/git_workflow.md`
-- Vérification tests : `@~/.claude/rules/testing_global.md`
-- Vérification secrets : `@~/.claude/rules/security_global.md`
+- Format et granularité : `@~/.claude/rules/git-workflow.md`
+- Vérification tests : `@~/.claude/rules/testing.md`
+- Vérification secrets : `@~/.claude/rules/security-app.md`
 
 ## Critères de qualité
 

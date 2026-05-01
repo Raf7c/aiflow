@@ -1,7 +1,17 @@
 ---
-description: "Sécurité infra (transverse, moindre privilège)."
-globs: ["**/infra/**", "**/*.tf", "**/*.tfvars", "**/Dockerfile*", "**/docker-compose*.y*ml", "**/.github/workflows/**", "**/.gitlab-ci.yml", "**/Jenkinsfile"]
-alwaysApply: false
+description: "Sécurité infra : moindre privilège, identités, isolation, credentials éphémères. Auto-activée sur les fichiers infra, conteneurs, k8s et CI/CD."
+paths:
+  - "**/infra/**"
+  - "**/*.tf"
+  - "**/*.tfvars"
+  - "**/Dockerfile*"
+  - "**/docker-compose*.y*ml"
+  - "**/.github/workflows/**"
+  - "**/.gitlab-ci.yml"
+  - "**/Jenkinsfile"
+  - "**/k8s/**"
+  - "**/kubernetes/**"
+  - "**/helm/**"
 ---
 
 Objectif: Réduire la surface d'attaque et l'impact d'un incident.

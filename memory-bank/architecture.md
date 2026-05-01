@@ -1,5 +1,8 @@
 # Architecture
 
+> **TEMPLATE** — copier dans `memory-bank/architecture.md` de chaque nouveau projet et remplir.
+> Ne décrit pas le repo aiflow lui-même.
+
 <!--
 But : décrire la structure technique du projet, sa stack, ses composants, ses flux.
 Mis à jour à chaque changement structurel (nouveau service, changement de DB, refonte).

@@ -1,5 +1,8 @@
 # Overview
 
+> **TEMPLATE** — copier dans `memory-bank/overview.md` de chaque nouveau projet et remplir.
+> Ne décrit pas le repo aiflow lui-même.
+
 <!--
 But : décrire ce que fait ce projet, pour qui, et pourquoi il existe.
 Stable dans le temps. Mis à jour 1-2 fois par an maximum.

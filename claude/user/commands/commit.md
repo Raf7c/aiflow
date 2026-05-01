@@ -1,5 +1,12 @@
 ---
 description: "Génère un message de commit Conventional Commits depuis le diff staged."
+allowed-tools:
+  - Bash(git diff:*)
+  - Bash(git diff --staged)
+  - Bash(git status)
+  - Bash(git reset:*)
+  - Bash(git commit:*)
+  - Read
 ---
 
 # /commit
@@ -22,7 +29,7 @@ Voir `@~/.claude/templates/git/commit.md` pour le format strict, les exemples et
 
 ## Rules
 
-Voir `@~/.claude/rules/git_workflow.md` pour les règles de granularité et d'atomicité.
+Voir `@~/.claude/rules/git-workflow.md` pour les règles de granularité et d'atomicité.
 
 ## Critères de qualité
 

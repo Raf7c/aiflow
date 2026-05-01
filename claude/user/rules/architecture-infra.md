@@ -1,7 +1,17 @@
 ---
-description: "Architecture infra modulaire (transverse)."
-globs: ["**/infra/**", "**/*.tf", "**/*.tfvars", "**/Dockerfile*", "**/docker-compose*.y*ml", "**/.github/workflows/**", "**/.gitlab-ci.yml", "**/Jenkinsfile"]
-alwaysApply: false
+description: "Architecture infra modulaire et déclarative : composants réutilisables, configuration externalisée, indépendance d'environnement. Auto-activée sur les fichiers infra, conteneurs, k8s et CI/CD."
+paths:
+  - "**/infra/**"
+  - "**/*.tf"
+  - "**/*.tfvars"
+  - "**/Dockerfile*"
+  - "**/docker-compose*.y*ml"
+  - "**/.github/workflows/**"
+  - "**/.gitlab-ci.yml"
+  - "**/Jenkinsfile"
+  - "**/k8s/**"
+  - "**/kubernetes/**"
+  - "**/helm/**"
 ---
 
 Objectif: Infra modulaire, déclarative, indépendante de l'environnement.

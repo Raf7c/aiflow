@@ -1,5 +1,8 @@
 # Decisions
 
+> **TEMPLATE** — copier dans `memory-bank/decisions.md` de chaque nouveau projet et remplir au fil de l'eau.
+> Ne décrit pas le repo aiflow lui-même.
+
 <!--
 But : journal append-only des décisions techniques structurantes.
 Format ADR (Architecture Decision Record) simplifié.

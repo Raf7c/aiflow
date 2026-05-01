@@ -1,0 +1,17 @@
+# Claude Code — local overrides à ne jamais commiter
+**/settings.local.json
+**/.claude/projects/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Éditeurs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Sortie d'audit / scratch local
+audit_*.md
+*.local.md
